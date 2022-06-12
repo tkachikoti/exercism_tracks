@@ -1,23 +1,4 @@
 // @ts-check
-//
-// ☝🏽 The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion on the web
-// and supported IDEs when implementing this exercise. You don't need to
-// understand types, JSDoc, or TypeScript in order to complete this JavaScript
-// exercise, and can completely ignore this comment block and directive.
-
-// 👋🏽 Hi again!
-//
-// A quick reminder about exercise stubs:
-//
-// 💡 You're allowed to completely clear any stub before you get started. Often
-// we recommend using the stub, because they are already set-up correctly to
-// work with the tests, which you can find in ./freelancer-rates.spec.js.
-//
-// 💡 You don't need to write JSDoc comment blocks yourself; it is not expected
-// in idiomatic JavaScript, but some companies and style-guides do enforce them.
-//
-// Get those rates calculated!
 
 /**
  * The day rate, given a rate per hour
@@ -26,7 +7,8 @@
  * @returns {number} the rate per day
  */
 export function dayRate(ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  const HOURS_WORKED_A_DAY = 8;
+  return ratePerHour * HOURS_WORKED_A_DAY;
 }
 
 /**
@@ -37,7 +19,7 @@ export function dayRate(ratePerHour) {
  * @returns {number} the number of days
  */
 export function daysInBudget(budget, ratePerHour) {
-  throw new Error('Remove this line and implement the function');
+  return Math.floor(budget / dayRate(ratePerHour));
 }
 
 /**
@@ -49,5 +31,12 @@ export function daysInBudget(budget, ratePerHour) {
  * @returns {number} the rounded up discounted rate
  */
 export function priceWithMonthlyDiscount(ratePerHour, numDays, discount) {
-  throw new Error('Remove this line and implement the function');
+  const MONTHLY_BILLABLE_DAYS = 22;
+  let project_duration_in_months = Math.floor(numDays / MONTHLY_BILLABLE_DAYS);
+  let non_discounted_project_days = numDays % MONTHLY_BILLABLE_DAYS;
+
+  let standard_monthly_rate = dayRate(ratePerHour) * (project_duration_in_months * MONTHLY_BILLABLE_DAYS);
+  let discounted_monthly_rate = standard_monthly_rate * discount;
+  let non_discounted_monthly_rate = non_discounted_project_days * dayRate(ratePerHour);
+  return Math.ceil(discounted_monthly_rate + non_discounted_monthly_rate);
 }
