@@ -1,25 +1,13 @@
 // @ts-check
-//
-// The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion when
-// implementing this exercise.
-
 /**
  * Calculates the total bird count.
  *
  * @param {number[]} birdsPerDay
  * @returns {number} total bird count
  */
-export function totalBirdCount(birdsPerDay) {
-  let totalBirds = 0;
-
-  for (let i = 0; i < birdsPerDay.length; i++) {
-    totalBirds += birdsPerDay[i];
-  }
-
-  return totalBirds;
+ export function totalBirdCount(birdsPerDay) {
+  return birdsPerDay.reduce((acc, cur) => acc + cur);
 }
-
 /**
  * Calculates the total number of birds seen in a specific week.
  *
@@ -28,17 +16,8 @@ export function totalBirdCount(birdsPerDay) {
  * @returns {number} birds counted in the given week
  */
 export function birdsInWeek(birdsPerDay, week) {
-  let totalBirds = 0;
-  const A_WEEK_IN_DAYS = 7
-  let dayTracker = (week === 1) ? 0 : (week - 1) * A_WEEK_IN_DAYS;
-  
-  for (let i = dayTracker; i < (dayTracker + A_WEEK_IN_DAYS); i++) {
-    totalBirds += birdsPerDay[i];
-  }
-
-  return totalBirds;
+    return totalBirdCount(birdsPerDay.slice(week*7-7, week*7));
 }
-
 /**
  * Fixes the counting mistake by increasing the bird count
  * by one for every second day.
@@ -47,11 +26,6 @@ export function birdsInWeek(birdsPerDay, week) {
  * @returns {number[]} corrected bird count data
  */
 export function fixBirdCountLog(birdsPerDay) {
-  for (let i = 0; i < birdsPerDay.length; i++) {
-    if ((i + 1) % 2) {
-      birdsPerDay[i] += 1;
-    }
-  }
-
+  for (let i = 0; i < birdsPerDay.length; i += 2) birdsPerDay[i]++;
   return birdsPerDay;
 }
