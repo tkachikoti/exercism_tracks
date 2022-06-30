@@ -1,8 +1,4 @@
 // @ts-check
-//
-// The line above enables type checking for this file. Various IDEs interpret
-// the @ts-check directive. It will give you helpful autocompletion when
-// implementing this exercise.
 
 /**
  * Determines how long it takes to prepare a certain juice.
@@ -11,7 +7,24 @@
  * @returns {number} time in minutes
  */
 export function timeToMixJuice(name) {
-  throw new Error('Please implement the timeToMixJuice function');
+  let time = 0
+  switch (name) {
+    case 'Pure Strawberry Joy':
+      time = 0.5;
+      break;
+    case 'Energizer' || 'Green Garden':
+      time = 1.5;
+      break;
+    case 'Tropical Island':
+      time = 3;
+      break;
+    case 'All or Nothing':
+      time = 5;
+      break;
+    default:
+      time = 2.5;
+  }
+  return time;
 }
 
 /**
@@ -23,7 +36,24 @@ export function timeToMixJuice(name) {
  * @returns {number} number of limes cut
  */
 export function limesToCut(wedgesNeeded, limes) {
-  throw new Error('Please implement the limesToCut function');
+  let wedgesPotential = 0;
+
+  while (wedgesPotential < wedgesNeeded) {
+    let lime = limes.pop();
+    console.log(limes.length)
+    console.log(limes[0])
+    console.log(limes.pop())
+
+    if (lime === 'small') {
+      wedgesPotential += 6;
+    } else if (lime === 'medium') {
+      wedgesPotential += 8;
+    } else if (lime === 'large') {
+      wedgesPotential += 10;
+    }
+  }
+
+  return wedgesPotential;
 }
 
 /**
